@@ -24,12 +24,14 @@ total_cable = raw_input('Enter total cable bill: ')
 movie_amt_choice = raw_input("Enter total movie amount (if none, enter 'no': ")
 
 try:
-	movie_amt = int(movie_amt_choice)
+	movie_amt = float(movie_amt_choice)
 except:
 	print "That's not an integer! Using 0 instead..."
 	movie_amt = 0
 
-print movie_amt_choice
+if movie_amt != 0:
+	movie_split = raw_input("Enter the number of people splitting the movie(s): ")
+	print float(movie_amt) / float(movie_split)
 
 base, hbo_split, cable_box_split, adapter_split, movie = cable_bill(total=total_cable, movie=movie_amt)
 
