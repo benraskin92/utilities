@@ -1,3 +1,12 @@
+import sqlite3
+
+conn = sqlite3.connect("utility_db.sqlite")
+c = conn.cursor()
+
+# cable = 241.95
+# total = 1718.24
+# movie = 5
+
 def calculate_electric(electric):
 	electic_split = float(electric) / 4
 	return electic_split
@@ -61,5 +70,12 @@ totals[m] += (hbo_split + cable_box_split)
 
 for person in totals:
 	print "{} owes {}!".format(person, totals[person])
+
+for individual in totals:
+	month = 'August'
+	c.execute("""INSERT INTO utilities(name, month, amt) VALUES (?,?,?);""", (individual,month,totals[individual]))
+
+conn.commit()
+conn.close()
 
 check_yo_self(totals, total_rent, total_cable, movie_amt)
